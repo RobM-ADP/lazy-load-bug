@@ -1,27 +1,4 @@
-# Main
+# Lazy load bundle issue
+When lazy loading bundles via a library project as described here: https://github.com/angular/angular-cli/issues/6373#issuecomment-453006158 the bundling of the routes is incorrect.
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 7.3.8.
-
-## Development server
-
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
-
-## Code scaffolding
-
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
-
-## Build
-
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
-
-## Running unit tests
-
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
-
-## Running end-to-end tests
-
-Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
+Clone and run this repo and you will notice that while the wrapper modules are correctly lazy loaded, the actual modules and components from the library are all bundled into the common.js bundle which completely defeats the purpose of lazy loading. It seems that when lazy loading routes from a library, each route would need to be its own library or secondary entry point in order for the bundling to work correctly which IMHO doesn't make sense when using the libraries for feature development.
