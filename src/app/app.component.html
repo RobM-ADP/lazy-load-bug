@@ -1,4 +1,10 @@
-<!--The content below is only a placeholder and can be replaced.-->
-<a [routerLink]="['/aaa']">aaa</a> | <a [routerLink]="['/bbb']">bbb</a>
+<h1>Lazy loaded route bundling issue</h1>
+<p>When lazy loading bundles via a library project as described here: https://github.com/angular/angular-cli/issues/6373#issuecomment-453006158 the bundling of the routes is incorrect.</p>
+
+<p>Clone and run this repo and you will notice that while the wrapper modules are correctly lazy loaded, the actual modules and components from the library are all bundled into the common.js bundle which completely defeats the purpose of lazy loading. It seems that when lazy loading routes from a library, each route would need to be its own library or secondary entry point in order for the bundling to work correctly which IMHO doesn't make sense when using the libraries for feature development.</p>
+
+<p>Notice that even before loading either or the following lazy routes, all of the code for them except the wrapper is in the common.js bundle</p>
+
+<p><a [routerLink]="['/aaa']">Route A</a> | <a [routerLink]="['/bbb']">Route B</a></p>
 
 <router-outlet></router-outlet>
